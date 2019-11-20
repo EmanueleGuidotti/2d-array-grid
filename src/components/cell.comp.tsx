@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 
-type CellProps = {
+interface CellProps {
   bit: number;
+  index: number;
   whSize: number;
-};
+}
 
 class CellComponent extends Component<CellProps> {
   render() {
