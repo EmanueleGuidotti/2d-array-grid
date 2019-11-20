@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import CellComponent from "./cell.comp";
 import { grid } from "../shared/utils";
@@ -9,29 +8,25 @@ interface GridState {
 }
 
 class GridComponent extends Component<{}, GridState> {
-  state: GridState;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: grid
-    };
-  }
+  state: GridState = {
+    data: grid
+  };
 
   render() {
     const { data } = this.state;
+    const whSize: number = Dimensions.get("window").width / data.length + 1;
     return (
       <View style={styles.grid}>
         {data.map((bitList, i) => {
-          const whSize = Dimensions.get("window").width / data.length + 1;
           return (
             <View key={i} style={styles.row}>
-              {bitList.map((bit, index) => {
+              {bitList.map((bit, j) => {
                 return (
                   <CellComponent
                     bit={bit}
+                    index={j}
                     whSize={whSize}
-                    key={index}
+                    key={j}
                   ></CellComponent>
                 );
               })}
