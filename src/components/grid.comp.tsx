@@ -5,11 +5,13 @@ import { grid } from "../shared/utils";
 
 interface GridState {
   data: number[][];
+  board: number
 }
 
 class GridComponent extends Component<{}, GridState> {
   state: GridState = {
-    data: grid
+    data: grid,
+    board: grid.map(i => i.length).reduce((p, n) => p + n)
   };
 
   render() {
