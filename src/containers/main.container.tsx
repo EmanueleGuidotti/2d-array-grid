@@ -1,25 +1,34 @@
-import React, { Component } from "react";
-import GridComponent from "../components/grid.comp";
-import { View, Text, StyleSheet } from "react-native";
+import React, { Component } from 'react';
+import GridComponent from '../components/grid.comp';
+import { View, Text, StyleSheet } from 'react-native';
+import { grid5 } from '../shared/utils';
 
-class MainContainer extends Component {
-  render() {
-    return (
-      <View>
-        <Text style={styles.h1}>Title</Text>
-        <GridComponent></GridComponent>
-      </View>
-    );
-  }
+interface MainState {
+	grid: number[][];
+}
+
+class MainContainer extends Component<{}, MainState> {
+	state: MainState = {
+		grid: grid5
+	};
+
+	render() {
+		return (
+			<View>
+				<Text style={styles.h1}>Title</Text>
+				<GridComponent data={this.state.grid}></GridComponent>
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-  h1: {
-    fontSize: 30,
-    fontWeight: "bold",
-    textAlign: "center",
-    paddingVertical: 10
-  }
+	h1: {
+		fontSize: 30,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		paddingVertical: 10
+	}
 });
 
 export default MainContainer;
