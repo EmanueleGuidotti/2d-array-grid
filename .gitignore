@@ -12,3 +12,8 @@ web-report/
 
 # macOS
 .DS_Store
+.idea/$PRODUCT_WORKSPACE_FILE$
+.idea/misc.xml
+.idea/modules.xml
+.idea/repo.iml
+.idea/vcs.xml
