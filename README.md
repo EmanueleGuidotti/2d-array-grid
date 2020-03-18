@@ -1,4 +1,4 @@
-# 2D Array render with react native
+# Interactive 2D Array render in react native
 Initial data is:
 ```
 const data = [
