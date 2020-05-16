@@ -6,7 +6,7 @@
  * and can reset the private variables thanks to the reset inner function
  * @param x - number coordinate
  * @param y - number coordinate
- * @param grid - 2d array
+ * @param dArray - 2d array
  */
 export const recursiveCheck = (() => {
 	let flatten: number[] = [];
