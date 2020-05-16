@@ -1,7 +1,7 @@
 import React from 'react';
 import GridComponent from './grid.comp';
 import renderer from 'react-test-renderer';
-import { grid5, grid3 } from '../shared/utils';
+import { grid5, grid3 } from '../shared/data';
 
 test('Expect render 5 row x 5 cells component', () => {
 	const data: number[][] = grid5;

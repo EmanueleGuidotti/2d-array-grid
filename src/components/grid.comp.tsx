@@ -51,10 +51,13 @@ class GridComponent extends Component<DataProps, GridState> {
 									return (
 										<CellComponent
 											bit={bit}
+                                            data={data}
 											index={j}
 											whSize={whSize}
 											key={j}
-										></CellComponent>
+                                            Xcoordinate={i}
+                                            Ycoordinate={j}
+										/>
 									);
 								})}
 							</View>
