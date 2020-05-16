@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
+import { recursiveCheck } from '../shared/utils';
+import {grid5} from "../shared/data";
 
 interface CellProps {
 	bit: number;
 	index: number;
 	whSize: number;
+	Xcoordinate: number;
+	Ycoordinate: number;
+    data: number[][];
+}
+
+interface recursiveArguments {
+	x: number;
+	y: number;
+	bit: number;
 }
 
 class CellComponent extends Component<CellProps> {
+	checkPosition = (args: recursiveArguments) => {
+		recursiveCheck.reset(this.props.data);
+		const result = recursiveCheck.init(args.x, args.y);
+	};
+
 	render() {
-		const { bit, whSize } = this.props;
+		const { bit, whSize, Xcoordinate, Ycoordinate } = this.props;
 		return (
 			<TouchableOpacity
 				style={[
@@ -18,8 +34,10 @@ class CellComponent extends Component<CellProps> {
 					{ width: whSize },
 					{ height: whSize }
 				]}
-				onPress={() => console.log(bit)}
-			></TouchableOpacity>
+				onPress={() =>
+					this.checkPosition({ y: Ycoordinate, x: Xcoordinate, bit: bit })
+				}
+			/>
 		);
 	}
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GridComponent from '../components/grid.comp';
 import { View, Text, StyleSheet } from 'react-native';
-import { grid5 } from '../shared/utils';
+import { grid5 } from '../shared/data';
 
 interface MainState {
 	grid: number[][];
@@ -15,7 +15,7 @@ class MainContainer extends Component<{}, MainState> {
 	render() {
 		return (
 			<View>
-				<Text style={styles.h1}>Title</Text>
+				<Text style={styles.h1}>Tap an element</Text>
 				<GridComponent data={this.state.grid}></GridComponent>
 			</View>
 		);
