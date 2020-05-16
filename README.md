@@ -17,8 +17,8 @@ Given a 2d array of numbers I want to create a grid of squares. The cells could 
 
 ## Main purpose
 
-Tapping a filled square I want to show the adjacent cells only if filled and consequential.
-*You che find the algorithm solution inside the utils.tsx*
+Tapping a filled square I want to show the adjacent cells only if filled and consequential.  
+*You can find the algorithm solution inside the utils.tsx*
 
 ## How to use
 
