@@ -16,7 +16,7 @@ class MainContainer extends Component<{}, MainState> {
 		return (
 			<View>
 				<Text style={styles.h1}>Tap an element</Text>
-				<GridComponent data={this.state.grid}></GridComponent>
+				<GridComponent data={this.state.grid} />
 			</View>
 		);
 	}

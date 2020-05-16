@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, Dimensions } from 'react-native';
 import CellComponent from './cell.comp';
+import { recursiveCheck } from '../shared/utils';
 
 interface DataProps {
 	data: number[][];
@@ -9,13 +10,19 @@ interface GridState {
 	data: number[][];
 	board: number;
 	whSize: number;
+	result: number;
+}
+interface recursiveArguments {
+	x: number;
+	y: number;
 }
 
 class GridComponent extends Component<DataProps, GridState> {
 	state: GridState = {
 		data: [],
 		board: 0,
-		whSize: 0
+		whSize: 0,
+		result: 0
 	};
 
 	componentDidMount(): void {
@@ -28,42 +35,51 @@ class GridComponent extends Component<DataProps, GridState> {
 		}
 	}
 
-	saveGridData = (grid: number[][]) => {
-		const data = grid;
-		const board = data.map(i => i.length).reduce((p, n) => p + n);
+	saveGridData = (grid: number[][]): void => {
+		const board = grid.map(i => i.length).reduce((p, n) => p + n);
 		this.setState({
-			data: data,
+			data: grid,
 			board: board,
-			whSize: Dimensions.get('window').width / data.length + 1
+			whSize: Dimensions.get('window').width / grid.length + 1
 		});
 	};
 
+	_checkAdjacent = (args: recursiveArguments): void => {
+		recursiveCheck.reset(this.props.data);
+		const result = recursiveCheck.init(args.x, args.y);
+		this.setState({ result });
+	};
+
 	render() {
-		const { data, whSize } = this.state;
-		if (!data.length) return <View></View>;
+		const { data, whSize, result } = this.state;
+		if (!data.length) return <View/>;
 		else
 			return (
-				<View style={styles.grid}>
-					{data.map((bitList, i) => {
-						return (
-							<View key={i} style={styles.row}>
-								{bitList.map((bit, j) => {
-									return (
-										<CellComponent
-											bit={bit}
-                                            data={data}
-											index={j}
-											whSize={whSize}
-											key={j}
-                                            Xcoordinate={i}
-                                            Ycoordinate={j}
-										/>
-									);
-								})}
-							</View>
-						);
-					})}
-				</View>
+				<>
+					<View style={styles.grid}>
+						{data.map((bitList, i) => {
+							return (
+								<View key={i} style={styles.row}>
+									{bitList.map((bit, j) => {
+										return (
+											<CellComponent
+												bit={bit}
+												checkAdjacent={() =>
+													this._checkAdjacent({ y: j, x: i })
+												}
+												whSize={whSize}
+												key={j}
+											/>
+										);
+									})}
+								</View>
+							);
+						})}
+					</View>
+					<View>
+						<Text style={styles.info}>Adjacent elements: {result}</Text>
+					</View>
+				</>
 			);
 	}
 }
@@ -80,7 +96,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-around',
 		alignItems: 'stretch',
 		flexWrap: 'nowrap'
-	}
+	},
+    info: {
+	    fontSize: 20,
+        paddingVertical: 20,
+        textAlign: 'center'
+    }
 });
 
 export default GridComponent;

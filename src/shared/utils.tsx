@@ -19,7 +19,7 @@ export const recursiveCheck = (() => {
 		constant = dArray[0].length;
         counter = 0;
 	};
-	const inner = (y: number, x: number) => {
+	const inner = (y: number, x: number):number => {
 		let pos = y > 0 ? constant * y + x : x;
 		// If the selected element is 0 exit from thread
 		if (flatten[pos] == 0) return 0;
@@ -58,5 +58,5 @@ export const recursiveCheck = (() => {
 		counter = flatten_zero.reduce((a:number, b:number) => a + b, 0) as number;
 		return counter as number;
 	};
-	return { init: inner, reset: resetCounter };
+	return { init: inner as Function, reset: resetCounter as Function };
 })();
